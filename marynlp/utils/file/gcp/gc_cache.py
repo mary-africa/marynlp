@@ -34,13 +34,15 @@ def cache_from_google_bucket(bucket_content_path: str,
     if not os.path.exists(to_store_path):
         bucket = google_client.get_bucket(bucket_name)
 
-        blob = bucket.get_blob(bucket_content_path,
-                               client=google_client,
+        blob = bucket.blob(bucket_content_path,
                                encryption_key=encryption_key)
 
         # Stores the file to the cache file
+        blob.download_to_filename(to_store_path)
 
-        with Cache(to_store_path) as cb:
-            blob.download_to_file(cb)
+        # with Cache(to_store_path) as cb:
+        #     blob.download_to_file(cb)
 
-        print(f"Cached contents from {bucket_content_path} to CachedPath({to_store_path})")
+        print(f"Cached contents from '{bucket_content_path}' to '{to_store_path}'")
+    else:
+        print('The path -> {}, already exists'.format(to_store_path))
