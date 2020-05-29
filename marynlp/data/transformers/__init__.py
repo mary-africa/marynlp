@@ -17,7 +17,7 @@ class DataTextTransformer(object):
         return f'{type(self).__name__}(self.extra_repr())'
 
 
-class StackedTextTransformer(DataTextTransformer):
+class StackedDataTextTransformer(DataTextTransformer):
     def __init__(self, transformers: List[DataTextTransformer]):
         assert len(transformers) > 0, 'You must include atleast one DataTextTransformer'
 
