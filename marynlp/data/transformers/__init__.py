@@ -1,11 +1,5 @@
-from unicodedata import normalize
 from overrides import overrides
-from .reference_vocabulary import LowerCaseSwahiliRV
-from nltk.tokenize import RegexpTokenizer
 from typing import List
-
-from .reference_vocabulary import UNK_TOKEN, UNK_CHAR, NUM_TOKEN, \
-    REGEX_UNK_TOKEN, REGEX_UNK_CHAR, REGEX_NUM_TOKEN
 
 
 class DataTextTransformer(object):
