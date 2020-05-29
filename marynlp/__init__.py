@@ -1,0 +1,1 @@
+from marynlp._version import VERSION as __version__
