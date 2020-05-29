@@ -11,9 +11,7 @@ from flair.data import Sentence
 
 
 class TextClassifier(Module):
-    @property
-    def pretrained_models(self):
-        return pretrained_models_class['classifier']
+    pretrained_models = pretrained_models_class['classifier']
 
     def __init__(self, text_clf: FlairTextClassifier, transformer: DataTextTransformer):
         self.text_clf = text_clf
@@ -43,7 +41,7 @@ class TextClassifier(Module):
         # use path model
         model_dir_path = Path(model_dir_path)
 
-        assert model_dir_path.exists(), 'Model path doesn\'t exist'
+        assert model_dir_path.exists(), 'model directory \'{}\' doesn\'t exist'.format(model_dir_path)
 
         # setting the contents to load the data
         model_full_path = model_dir_path.joinpath(model_option)

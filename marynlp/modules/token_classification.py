@@ -8,9 +8,7 @@ from marynlp import SWAHILI_LANGUAGE_CODE
 
 
 class TokenClassifier(Module):
-    @property
-    def pretrained_models(self):
-        return pretrained_models_class['taggers']
+    pretrained_models = pretrained_models_class['taggers']
 
     def __init__(self,
                  tagger: FlairSequenceTagger,
