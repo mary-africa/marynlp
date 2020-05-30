@@ -38,7 +38,31 @@ for stp in support_type:
 class Module(object):
     @property
     def pretrained_models(self):
-        raise NotImplementedError()
+        """loads the entire dictionary of all the models"""
+        return {vals[0]: vals[1] for vals in pretrained_models_class.values()}
+
+    @classmethod
+    def get_full_model_path(cls, src: str, credentials_json_path: str = None, model_option: str='best-model.pt'):
+        src = src.lower()
+
+        if src in cls.pretrained_models:
+            # check if the credentials key exists
+            assert credentials_json_path, 'If using pre-trained model, you need to include the credentials key file'
+            assert Path(credentials_json_path).exists(), "Credentials key file doesn't exist"
+
+            model_dir_path = cls._get_pretrained_model_path(src, credentials_json_path)
+        else:
+            model_dir_path = src
+
+        # use path model
+        model_dir_path = Path(model_dir_path)
+
+        assert model_dir_path.exists(), 'model directory \'{}\' doesn\'t exist'.format(model_dir_path)
+
+        # setting the contents to load the data
+        model_full_path = model_dir_path.joinpath(model_option)
+
+        return model_full_path
 
     @classmethod
     def _get_pretrained_model_path(cls, src: str, credentials_json_path):

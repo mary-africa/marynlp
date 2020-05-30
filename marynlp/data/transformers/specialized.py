@@ -5,7 +5,7 @@ from nltk.tokenize import RegexpTokenizer
 from typing import List, Tuple, Iterator
 import re
 
-from marynlp.data.transformers import DataTextTransformer
+from marynlp.data.transformers import DataTextTransformer, StackedDataTextTransformer
 from marynlp.data.reference_vocabulary import UNK_TOKEN, UNK_CHAR, NUM_TOKEN, \
     REGEX_UNK_TOKEN, REGEX_UNK_CHAR, REGEX_NUM_TOKEN
 
@@ -170,3 +170,12 @@ class FlairSupportTransformer(DataTextTransformer):
         Returns the values
         """
         return [x[-1] for x in self.sub_pair if x[0] != REGEX_UNK_TOKEN]
+
+
+class FlairDataTextTransformer(StackedDataTextTransformer):
+    def __init__(self):
+        super().__init__([
+            TextNormalizer(),
+            SwahiliTextTransformer(),
+            FlairSupportTransformer()
+        ])
