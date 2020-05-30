@@ -20,7 +20,7 @@ support_type, dict_model = ((
                             ),
                             {
                                 'classifier': ('wpc-small'),
-                                'language-model': ('sw_lm-base'),
+                                'language-model': ('sw-early-uncased-forward'),
                                 'taggers': ('sw-ner-gen1f-base')
                             })
 
