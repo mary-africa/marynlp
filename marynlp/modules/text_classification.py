@@ -17,7 +17,7 @@ class TextClassifier(Module):
         self.text_clf = text_clf
         self.transform = transformer
 
-    def classify(self, text: List[str]):
+    def classify(self, text: str):
         sentence = Sentence(self.transform(text), language_code=SWAHILI_LANGUAGE_CODE)
         self.text_clf.predict(sentence)
 
