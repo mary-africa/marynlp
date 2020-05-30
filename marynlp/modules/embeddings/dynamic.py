@@ -15,7 +15,16 @@ from flair.data import Sentence
 from marynlp import SWAHILI_LANGUAGE_CODE
 
 
-class SwahiliFlairEmbeddings(Module):
+class DynamicEmbeddings(Module):
+    def embed(self, text: Union[str, List[str]]):
+        raise NotImplementedError()
+
+    @classmethod
+    def from_pretrained(cls, src: str, credentials_json_path: str = None, **module_kwargs):
+        raise NotImplementedError()
+
+
+class SwahiliFlairEmbeddings(DynamicEmbeddings):
     # this filters all the language models that have `flair-` in them
     pretrained_models = { k: v for k, v in pretrained_models_class['language-model'].items() if 'flair' in k }
 

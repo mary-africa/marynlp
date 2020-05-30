@@ -1,8 +1,8 @@
 from flair.data import Sentence
 from flair.models import SequenceTagger as FlairSequenceTagger
 
-from marynlp.data.transformers import DataTextTransformer
-from marynlp.modules.module import Module, pretrained_models_class
+from ..data.transformers import DataTextTransformer
+from .module import Module, pretrained_models_class
 from marynlp import SWAHILI_LANGUAGE_CODE
 
 
