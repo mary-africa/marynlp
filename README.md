@@ -14,7 +14,7 @@ The package consists of the following components
 |------|-----------|
 |marynlp.data| Module contains anything that involves reading or manipulating data |
 |marynlp.data.readers| Module contains different types of data readers |
-|marynlp.data.transformers| Module contains objects that are responsible for transforming text from one form to another. This is handy when used with `marynlp.data.readers` as it helps in preprocessing the data as it is being red |
+|marynlp.data.transformers| Module contains objects that are responsible for transforming text from one form to another. This is handy when used with `marynlp.data.readers` as it helps in preprocessing the data as it is being read |
 |marynlp.modules| Contains pretrained modules that are used for different NLP Tasks |
 
 ## 
