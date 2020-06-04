@@ -5,7 +5,7 @@ from nltk.tokenize import RegexpTokenizer
 from typing import List, Tuple, Iterator
 import re
 
-from marynlp.data.transformers import DataTextTransformer, StackedDataTextTransformer
+from marynlp.data.transformers import DataTextTransformer, StackedDataTextTransformer, TagDataTransformer
 from marynlp.data.reference_vocabulary import UNK_TOKEN, UNK_CHAR, NUM_TOKEN, \
     REGEX_UNK_TOKEN, REGEX_UNK_CHAR, REGEX_NUM_TOKEN
 
@@ -75,52 +75,14 @@ I_TAG = 'I'
 O_TAG = 'O'
 B_TAG = 'B'
 
-
-class NERDataTransformer(DataTextTransformer):
-    def __init__(self, ref_vocab: LowerCaseSwahiliRV):
-        self.ref_vocab = ref_vocab
-
-        # initiate regex
-        self._init_regex()
-
-        self.tokenizer = RegexpTokenizer(self.token_regex)
-
-    def _init_regex(self):
-        word_regex, indi_word_regex = self._get_word_regex()
-        self.word_regex = word_regex
-        self.indi_word_regex = indi_word_regex
-        self.word_tag_pair_regex = f'\[([{self.word_regex}(\s){self.ref_vocab.base_word_non_letter_chars}]+),([{self.tag_regex}]+)\]'
+class NERDataTransformer(TagDataTransformer):
+    @overrides
+    def get_word_tag_regex(self):
+        return f'\[({self.regex_word}),([{self.regex_tag}]+)\]'
 
     @property
-    def tag_regex(self):
+    def regex_tag(self):
         return r'A-Za-z\s'
-
-    @property
-    def token_regex(self):
-        net_regex = f'({self.indi_word_regex})|({self.word_tag_pair_regex})'
-        return net_regex
-
-    def _get_regex_punctuations(self):
-        filtered_punctuations = ''.join([c for c in self.ref_vocab.base_punctuations if c not in list(',[]')])
-        regex_punctuation = ''.join([f'\\{c}' for c in filtered_punctuations])
-
-        return regex_punctuation
-
-    def _get_word_regex(self):
-        # word token with space
-        # for sentence matching
-        word_regex_ls = [
-            f'{self.ref_vocab.regex_word}',
-            self._get_regex_punctuations(),
-        ]
-
-        indi_word_regex_ls = [
-            f'[{self._get_regex_punctuations()}]',
-            f'[{self.ref_vocab.regex_word}]+',
-        ]
-
-        return "".join(f"({rgx})" for rgx in (self.ref_vocab.regex_special_tokens + word_regex_ls)), \
-               "|".join(self.ref_vocab.regex_special_tokens + indi_word_regex_ls)
 
     def iob_encode(self, text, main_tag) -> List[Tuple[str, str]]:
         tag = B_TAG
@@ -135,7 +97,7 @@ class NERDataTransformer(DataTextTransformer):
 
     @overrides
     def transform(self, text: str) -> Iterator[Tuple[str, str]]:
-        for o_word, tagged_word, *tag_content in self.tokenizer.tokenize(text):
+        for o_word, tagged_word, *tag_content in self.tokenize(text):
             if o_word.strip():
                 # this is a word
                 # O-tag it
