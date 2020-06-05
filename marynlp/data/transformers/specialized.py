@@ -113,6 +113,59 @@ class NERDataTransformer(TagDataTransformer):
                     yield word_biotag_pair
 
 
+# punctuation tag
+PUNCT = 'PUNCT'
+
+# number tag
+NUM = 'NUM'
+
+# unknown word tag
+X = 'X'
+
+
+class POSDataTransformer(TagDataTransformer):
+    @overrides
+    def get_word_tag_regex(self, regex_word, regex_tag):
+        return r'({0})\[({1})\]'.format(regex_word, regex_tag)
+
+    @property
+    def token_regex(self):
+        net_regex = f'({self.ref_vocab.regex_for_numbers})|{self.word_tag_pair_regex}|({self.indi_word_regex})'
+        return net_regex
+
+    @property
+    def regex_word(self):
+        return r'[{}]+|[{}]'.format(self.ref_vocab.regex_word, self.ref_vocab.regex_non_word)
+
+    @property
+    def regex_tag(self):
+        return r'[A-Za-z]+'
+
+    @overrides
+    def transform(self, text: str, lower: bool = True) -> Iterator[Tuple[str, str]]:
+        if lower:
+            text = text.lower()
+            text = re.sub(f'\[{PUNCT}\]|\[{NUM}\]'.lower(), '', text)
+        else:
+            text = re.sub(f'\[{PUNCT}\]|\[{NUM}\]', '', text)
+
+        for number, *num_grp, word, tag, other in self.tokenize(text):
+            if number.strip():
+                yield number, NUM
+            elif other.strip():
+                # check if word is punctuation
+                if re.match(f'[{self.ref_vocab.regex_non_word}]', other):
+                    yield other, PUNCT
+
+                else:
+                    yield other, X
+            elif word.strip():
+                if tag.upper() == 'N':
+                    tag = 'noun'
+
+                yield word, tag.upper()
+
+
 class FlairSupportTransformer(DataTextTransformer):
     """To support how flair embedds the words
 
