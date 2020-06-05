@@ -19,20 +19,21 @@ support_type, dict_model = ((
                                 'hf'  # When using HuggingFace trained models
                             ),
                             {
-                                'classifier': ('wpc-small'),
-                                'language-model': ('sw-early-uncased-forward'),
+                                'classifier': ('wpc-small',),
+                                'language-model': ('sw-early-uncased-forward',),
                                 'taggers': ('sw-ner-gen1f-base', 'sw-pos-early-h512')
                             })
 
 # this are used
 pretrained_models_class = {}
 for stp in support_type:
-    for mcl, model in dict_model.items():
+    for mcl, models in dict_model.items():
         if mcl not in pretrained_models_class:
             pretrained_models_class[mcl] = {}
 
-        # models classes
-        pretrained_models_class[mcl]['{}-{}'.format(stp, model)] = model_path_fn(stp, mcl, model)
+        for model in models:
+            # models classes
+            pretrained_models_class[mcl]['{}-{}'.format(stp, model)] = model_path_fn(stp, mcl, model)
 
 
 class Module(object):
