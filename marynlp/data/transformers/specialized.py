@@ -75,6 +75,7 @@ I_TAG = 'I'
 O_TAG = 'O'
 B_TAG = 'B'
 
+
 class NERDataTransformer(TagDataTransformer):
     @overrides
     def get_word_tag_regex(self):
@@ -96,7 +97,10 @@ class NERDataTransformer(TagDataTransformer):
             yield word, f'{tag}-{main_tag}'.upper()
 
     @overrides
-    def transform(self, text: str) -> Iterator[Tuple[str, str]]:
+    def transform(self, text: str, lower: bool = True) -> Iterator[Tuple[str, str]]:
+        if lower:
+            text = text.lower()
+
         for o_word, tagged_word, *tag_content in self.tokenize(text):
             if o_word.strip():
                 # this is a word

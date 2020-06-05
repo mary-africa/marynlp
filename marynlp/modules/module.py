@@ -21,7 +21,7 @@ support_type, dict_model = ((
                             {
                                 'classifier': ('wpc-small'),
                                 'language-model': ('sw-early-uncased-forward'),
-                                'taggers': ('sw-ner-gen1f-base')
+                                'taggers': ('sw-ner-gen1f-base', 'sw-pos-early-h512')
                             })
 
 # this are used

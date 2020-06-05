@@ -51,19 +51,26 @@ class TagDataTransformer(DataTextTransformer):
         word_regex, indi_word_regex = self._get_word_regex()
         self.word_regex = word_regex
         self.indi_word_regex = indi_word_regex
-        self.word_tag_pair_regex = self.get_word_tag_regex()
+
+    @property
+    def word_tag_pair_regex(self):
+        return self.get_word_tag_regex(self.regex_word, self.regex_tag)
 
     @property
     def regex_word(self):
         return '[{self.word_regex}(\s){self.ref_vocab.base_word_non_letter_chars}]+'
 
     @property
+    def regex_tag(self):
+        raise NotImplementedError()
+
+    def get_word_tag_regex(self, regex_word, regex_tag):
+        raise NotImplementedError()
+
+    @property
     def token_regex(self):
         net_regex = f'({self.indi_word_regex})|({self.word_tag_pair_regex})'
         return net_regex
-
-    def get_word_tag_regex(self):
-        raise NotImplementedError()
 
     def _get_regex_punctuations(self):
         filtered_punctuations = ''.join([c for c in self.ref_vocab.base_punctuations if c not in list(',[]')])
