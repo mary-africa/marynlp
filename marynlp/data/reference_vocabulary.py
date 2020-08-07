@@ -4,6 +4,7 @@ NUM_TOKEN, REGEX_NUM_TOKEN = '[NUM]', r'\[NUM\]'
 
 EOS_TOKEN, REGEX_EOS_TOKEN = '[EOS]', r'\[EOS\]'
 BOS_TOKEN, REGEX_BOS_TOKEN = '[BOS]', r'\[BOS\]'
+PAD_TOKEN, REGEX_PAD_TOKEN = '[PAD]', r'\[PAD\]'
 
 
 class _ReferenceVocabulary(object):
@@ -48,16 +49,16 @@ class LowerCaseSwahiliRV(_ReferenceVocabulary):
 
     @property
     def regex_word(self):
-        return r'{}{}'.format(self.base_characters, self.base_numbers)
+        return r'{}{}{}'.format(self.base_characters, self.base_numbers, self.base_word_non_letter_chars)
 
     @property
     def inverse_regex_non_word(self):
         non_word = self._backslash_punctuations() + [r'\s+']
-        return r'((?![{}]+)\W)'.format("".join(non_word))
+        return r'((?![{}{}]+)\W)'.format(self.base_word_non_letter_chars, "".join(non_word))
 
     @property
     def inverse_regex_word(self):
-        return r'((?![{}]+)\w+)'.format(self.regex_word)
+        return r'((?![{}]+)[\w{}]+)'.format(self.regex_word, self.base_word_non_letter_chars)
 
     def get_all_characters(self):
         return self.special_tokens + \

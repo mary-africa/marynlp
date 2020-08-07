@@ -43,6 +43,10 @@ class SwahiliTextTransformer(DataTextTransformer):
         self._regex_rule = "|".join(self.ref_vocab.regex_special_tokens + list(self._regex_for_extraction))
         self._regex_tokenizer = RegexpTokenizer(self._regex_rule)
 
+    @property
+    def reference_vocabulary(self):
+        return self.ref_vocab
+
     def valid_text_replace(self, text: str):
         # replace all words that dont follow swahili with '[UNK]'
         text = re.sub(self.ref_vocab.inverse_regex_word, UNK_TOKEN, text)
