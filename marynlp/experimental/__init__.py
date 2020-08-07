@@ -1,0 +1,1 @@
+from .mnm_speech_recogn_model import SpeechRecognitionModel
