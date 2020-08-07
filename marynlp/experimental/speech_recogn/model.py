@@ -1,5 +1,5 @@
 import torch.nn as nn
-from ..models.nn import ResidualCNN, BidirectionalGRU
+from marynlp.models.nn import ResidualCNN, BidirectionalGRU
 
 
 class SpeechRecognitionModel(nn.Module):
