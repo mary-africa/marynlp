@@ -48,6 +48,8 @@ for parent, model in additional_model.items():
     model_name = "{}-{}".format(parent, model)
     pretrained_models_class[parent][model_name] = "{}/{}".format(parent, model)
 
+print(pretrained_models_class)
+
 
 class Module(object):
     @property
