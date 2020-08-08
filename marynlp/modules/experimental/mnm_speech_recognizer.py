@@ -76,10 +76,12 @@ class MNMSpeechRecognizer(Module):
         charset = sorted(pd.read_csv(character_summary_csv_path, index_col=0)['char'].values.tolist())
 
         char_encoder = CharacterEncoder(data=charset)
+
+        # This MUST BE included
         default_model_params['n_class'] = char_encoder.count + 1
 
         speech_model = SpeechRecognitionModel(**default_model_params)
-        speech_model.load_state_dict(torch.load(model_full_path))
+        speech_model.load_state_dict(torch.load(str(model_full_path)))
 
         test_transform = torchaudio.transforms.MelSpectrogram()
         return cls(speech_model, char_encoder, test_transform)
