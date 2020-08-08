@@ -41,15 +41,15 @@ additional_model = {
     'voice': ['mnm-early-6k-ep100-bc64']
 }
 
-for parent, model in additional_model.items():
+for parent, models in additional_model.items():
     if parent not in pretrained_models_class:
         pretrained_models_class[parent] = {}
 
-    model_name = "{}-{}".format(parent, model)
-    pretrained_models_class[parent][model_name] = "{}/{}".format(parent, model)
+    for model in models:
+        model_name = "{}-{}".format(parent, model)
+        pretrained_models_class[parent][model_name] = "{}/{}".format(parent, model)
 
 print(pretrained_models_class)
-
 
 class Module(object):
     @property
