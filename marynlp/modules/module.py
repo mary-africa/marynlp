@@ -26,6 +26,7 @@ support_type, dict_model = ((
 
 # this are used
 pretrained_models_class = {}
+
 for stp in support_type:
     for mcl, models in dict_model.items():
         if mcl not in pretrained_models_class:
@@ -34,6 +35,15 @@ for stp in support_type:
         for model in models:
             # models classes
             pretrained_models_class[mcl]['{}-{}'.format(stp, model)] = model_path_fn(stp, mcl, model)
+
+# Including the additional models
+additional_model = {
+    'voice': ['mnm-early-6k-ep100-bc64']
+}
+
+for parent, model in additional_model.items():
+    model_name = "{}-{}".format(parent, model)
+    pretrained_models_class[parent][model_name] = "{}/{}".format(parent, model)
 
 
 class Module(object):
