@@ -2,7 +2,7 @@
 
 _MAJOR = 0
 _MINOR = 4
-_BUILD = 52
+_BUILD = 51
 
 _STATE = 'pre-beta'
 

@@ -81,7 +81,7 @@ class MNMSpeechRecognizer(Module):
         default_model_params['n_class'] = char_encoder.count + 1
 
         speech_model = SpeechRecognitionModel(**default_model_params)
-        speech_model.load_state_dict(torch.load(str(model_full_path)))
+        speech_model.load_state_dict(torch.load(str(model_full_path), map_location=torch.device('cpu')))
 
         test_transform = torchaudio.transforms.MelSpectrogram()
         return cls(speech_model, char_encoder, test_transform)
