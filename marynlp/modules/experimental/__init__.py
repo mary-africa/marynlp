@@ -1,0 +1,1 @@
+from .mnm_speech_recognizer import MNMSpeechRecognizer
