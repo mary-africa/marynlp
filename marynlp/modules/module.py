@@ -42,6 +42,9 @@ additional_model = {
 }
 
 for parent, model in additional_model.items():
+    if parent not in pretrained_models_class:
+        pretrained_models_class[parent] = {}
+
     model_name = "{}-{}".format(parent, model)
     pretrained_models_class[parent][model_name] = "{}/{}".format(parent, model)
 
