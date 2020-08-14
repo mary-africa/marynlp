@@ -1,5 +1,5 @@
-overrides
-flair==0.5
+overrides>=3.1.0
+flair>=0.5
 ipykernel==5.1.4
 ipython==7.13.0
 ipython-genutils==0.2.0
@@ -17,9 +17,9 @@ sacremoses==0.0.43
 scikit-learn==0.23.0
 scipy==1.4.1
 segtok==1.5.10
-sentencepiece==0.1.90
+sentencepiece>=0.1.90
 tokenizers==0.7.0
-torch==1.5.0
+torch>=1.5.0
 tqdm==4.46.0
 transformers==2.10.0
 torchaudio==0.6.0
