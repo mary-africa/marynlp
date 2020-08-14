@@ -1,1 +1,1 @@
-from .mnm_speech_recognizer import MNMSpeechRecognizer
+from .mnm23_speech_recognizer import MNMSpeechRecognizer

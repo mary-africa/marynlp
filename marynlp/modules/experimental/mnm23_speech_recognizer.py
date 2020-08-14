@@ -6,7 +6,6 @@ import torch.nn.functional as F
 from pathlib import Path
 
 import pandas as pd
-from typing import List
 
 from marynlp.modules.module import Module, pretrained_models_class
 from overrides import overrides
