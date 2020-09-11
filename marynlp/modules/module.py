@@ -1,5 +1,4 @@
 from marynlp.utils.file import storage_path, cache_from_google_bucket
-import itertools as it
 import shutil
 import os
 
@@ -19,7 +18,7 @@ support_type, dict_model = ((
                                 'hf'  # When using HuggingFace trained models
                             ),
                             {
-                                'classifier': ('wpc-small',),
+                                'classifier': ('wpc-small', 'sw-exp-sent_analy-small'),
                                 'language-model': ('sw-early-uncased-forward',),
                                 'taggers': ('sw-ner-gen1f-base', 'sw-pos-early-h256')
                             })

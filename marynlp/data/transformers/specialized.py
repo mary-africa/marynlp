@@ -170,6 +170,14 @@ class POSDataTransformer(TagDataTransformer):
                 yield word, tag.upper()
 
 
+class NormSwahiliTextTransformer(StackedDataTextTransformer):
+    def __init__(self):
+        super().__init__([
+            TextNormalizer(),
+            SwahiliTextTransformer()
+        ])
+
+
 class FlairSupportTransformer(DataTextTransformer):
     """To support how flair embedds the words
 
@@ -198,7 +206,6 @@ class FlairSupportTransformer(DataTextTransformer):
 class FlairDataTextTransformer(StackedDataTextTransformer):
     def __init__(self):
         super().__init__([
-            TextNormalizer(),
-            SwahiliTextTransformer(),
+            NormSwahiliTextTransformer(),
             FlairSupportTransformer()
         ])
