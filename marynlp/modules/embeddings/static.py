@@ -34,6 +34,9 @@ class TokenEmbeddings(object):
 
 
 class WordEmbeddings(TokenEmbeddings, Module):
+    #TODO: fix the pretrained_models @property bug
+    pretrained_models = ['ft-aaa-bbb-ccc']
+    
     def __init__(self, model: FlairTokenEmbeddings, data_transformers: List[DataTextTransformer]):
         self._emb = model
         self._dtf = StackedDataTextTransformer(data_transformers)
