@@ -181,7 +181,7 @@ class NormSwahiliTextTransformer(StackedDataTextTransformer):
 class FlairSupportTransformer(DataTextTransformer):
     """To support how flair embedds the words
 
-    Ensure the subpair replacement tokens arent in the set of allowed characterd
+    Ensure the sub-pairs replacement tokens aren't in the set of allowed characters
     """
     sub_pair = [
         (REGEX_UNK_TOKEN, '^'),
@@ -209,3 +209,9 @@ class FlairDataTextTransformer(StackedDataTextTransformer):
             NormSwahiliTextTransformer(),
             FlairSupportTransformer()
         ])
+
+
+class FtSupportTextTransformer(DataTextTransformer):
+    def transform(self, text: str):
+        text = re.sub(r'\'\-', '', text)
+        return text

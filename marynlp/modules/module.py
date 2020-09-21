@@ -15,12 +15,12 @@ _MARYNLP_BUCKET = 'marynlp-private'
 
 support_type, dict_model = ((
                                 'flair',  # When using flair trained models
-                                'hf'  # When using HuggingFace trained models
+                                'hf',  # When using HuggingFace trained models
                             ),
                             {
                                 'classifier': ('wpc-small', 'sw-exp-sent_analy-small'),
                                 'language-model': ('sw-early-uncased-forward',),
-                                'taggers': ('sw-ner-gen1f-base', 'sw-pos-early-h256')
+                                'taggers': ('sw-ner-gen1f-base', 'sw-pos-early-h256'),
                             })
 
 # this are used
@@ -36,8 +36,10 @@ for stp in support_type:
             pretrained_models_class[mcl]['{}-{}'.format(stp, model)] = model_path_fn(stp, mcl, model)
 
 # Including the additional models
+# flair storage format are such as model_folder_name/model.ext
 additional_model = {
-    'voice': ['mnm-early-6k-ep100-bc64']
+    'voice': ['mnm-early-6k-ep100-bc64'],
+    'fasttext': []
 }
 
 for parent, models in additional_model.items():
