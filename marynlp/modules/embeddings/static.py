@@ -71,6 +71,7 @@ class WordEmbeddings(TokenEmbeddings, Module):
     @overrides
     def from_pretrained(cls,
                         src: str,
+                        model_option=None,
                         credentials_json_path: str = None,
                         model_type: str = 'fasttext',
                         model_name='sw-fasttext-100',
@@ -91,8 +92,12 @@ class WordEmbeddings(TokenEmbeddings, Module):
 
         assert model_dir_path.exists(), 'model directory \'{}\' doesn\'t exist'.format(model_dir_path)
 
+        if model_option is None:
+            # setting model_option as folder_name.bin
+            model_option = "%s.bin" (model_dir_path.name)
+
         # setting the contents to load the data
-        model_full_path = model_dir_path.joinpath(model_option)
+        model_path = model_dir_path.joinpath(model_option)
 
         assert model_type in EMB_MODEL_TYPES, "The model '%s' is not supported, " + \
                                                 "choose among %r " % (model_type, EMB_MODEL_TYPES)
