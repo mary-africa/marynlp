@@ -18,7 +18,7 @@ support_type, dict_model = ((
                                 'hf',  # When using HuggingFace trained models
                             ),
                             {
-                                'classifier': ('wpc-small', 'sw-exp-sent_analy-small'),
+                                'classifier': ('wpc-small', 'sw-exp-sent_analy-small', 'sw-ft100-ffw-biLSTM-exp-sent_analy-small-h256-noreproj'),
                                 'language-model': ('sw-early-uncased-forward',),
                                 'taggers': ('sw-ner-gen1f-base', 'sw-pos-early-h256'),
                             })
