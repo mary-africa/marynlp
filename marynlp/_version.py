@@ -4,6 +4,7 @@ _MAJOR = 0
 _MINOR = 0
 _BUILD = 51
 
-_STATE = 'alpha'
+_STATE = 'alpha-1'
 
-VERSION = f'{_MAJOR}.{_MINOR}.{_BUILD}-{_STATE}'
+VERSION = '%d.%d.%d-%s' % (_MAJOR, _MINOR, _BUILD, _STATE)
+
