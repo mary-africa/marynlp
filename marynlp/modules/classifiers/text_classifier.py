@@ -98,4 +98,4 @@ class EmotionSentAnalyClassifier(_TextClassifier):
     
     @overrides
     def get_classes(self):
-        print(self.classes)
+        return (self.classes)
