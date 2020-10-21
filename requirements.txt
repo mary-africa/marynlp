@@ -16,6 +16,7 @@ scipy==1.4.1
 torch==1.6.0
 tqdm==4.46.0
 torchaudio==0.6.0
+lightgbm==3.0.0
 
 # TODO: revise these things 
 
