@@ -16,7 +16,7 @@ _classifier = {
 
 # Building the classe for Sentimental Analyis
 class _TextClassifier(Module):
-    """Make prediction of what class a text belongs to."""
+    """Make prediction of what class a text belongs to."""e
 
     
     def classify(self, texts: Union[str, List[str]]) -> Union[int, List[int]]:
