@@ -39,7 +39,8 @@ for stp in support_type:
 # flair storage format are such as model_folder_name/model.ext
 additional_model = {
     'voice': ['mnm-early-6k-ep100-bc64'],
-    'fasttext': []
+    'fasttext': [],
+    'models': ['early-tfidf-lgb-afhs']
 }
 
 for parent, models in additional_model.items():
@@ -59,14 +60,12 @@ class Module(object):
 
     @classmethod
     def get_full_model_path(cls, src: str, credentials_json_path: str = None, model_option: str='best-model.pt'):
-        src = src.lower()
-
-        if src in cls.pretrained_models:
+        if src.lower() in cls.pretrained_models:
             # check if the credentials key exists
             assert credentials_json_path, 'If using pre-trained model, you need to include the credentials key file'
             assert Path(credentials_json_path).exists(), "Credentials key file doesn't exist"
 
-            model_dir_path = cls._get_pretrained_model_path(src, credentials_json_path)
+            model_dir_path = cls._get_pretrained_model_path(src.lower(), credentials_json_path)
         else:
             model_dir_path = src
 
@@ -115,7 +114,7 @@ class Module(object):
 
             # Unzip the file
             with ZipFile(temp_local_model_zip, 'r') as zpf:
-                zpf.extractall(path=Path(local_model_path).parent)
+                zpf.extractall(path=Path(local_model_path))
 
             print('-' * 50)
             print('Deleting temp files')
