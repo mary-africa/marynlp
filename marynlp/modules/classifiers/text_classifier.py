@@ -8,7 +8,7 @@ from overrides import overrides
 from marynlp.text_encoders.label_encoder import LabelEncoder
 from marynlp.data.transformers.vectorized import TextTfidfVectorizer
 
-from marynlp.modules.module import Module
+from marynlp.modules.module import Module, pretrained_models_class
 
 _classifier = {
     'early-tfidf-lgb-afhs': 'models/early-tfidf-lgb-afhs.zip'
@@ -16,7 +16,7 @@ _classifier = {
 
 # Building the classe for Sentimental Analyis
 class _TextClassifier(Module):
-    """Make prediction of what class a text belongs to."""e
+    """Make prediction of what class a text belongs to."""
 
     
     def classify(self, texts: Union[str, List[str]]) -> Union[int, List[int]]:
@@ -35,6 +35,7 @@ class _TextClassifier(Module):
 
 
 class EmotionSentAnalyClassifier(_TextClassifier):
+    pretrained_models = pretrained_models_class['models']
     def __init__(self, 
                  classes: List[str],
                  models: List[lgb.Booster], 
