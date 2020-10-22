@@ -2,7 +2,7 @@
 
 _MAJOR = 0
 _MINOR = 0
-_BUILD = 67
+_BUILD = 69
 
 _STATE = 'alpha-1'
 
