@@ -53,7 +53,7 @@ class EmotionSentAnalyClassifier(_TextClassifier):
     def from_pretrained(cls, src: str, credentials_json_path: str = None, **kwargs):
         folder_path = cls.get_full_model_path(src, credentials_json_path=credentials_json_path, model_option='')
 
-        _classes = ['angry', 'fear', 'happy', 'sad']
+        _classes = ['angry', 'fearful', 'happy', 'sad']
         _models = [lgb.Booster(model_file=str(folder_path.joinpath(f'{class_name}_lgb.txt'))) for class_name in _classes] 
         
         word_vectorizer_path = folder_path.joinpath("word_vectorizer.pickle")
