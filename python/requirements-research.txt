@@ -1,0 +1,2 @@
+# requirements for research stuff 
+#  things including jupyter notebook, tqdm, other stuff
