@@ -1,4 +1,4 @@
-from marynlp.data.transformers import SwahiliTextTransformer
+from marynlp.data.transformers import SwahiliTextTransformer, DataTextTransformer
 
 def test_validate_text():
     """
@@ -9,3 +9,14 @@ def test_validate_text():
 
     transform = SwahiliTextTransformer()
     assert transform(text_to_validate) == 'mimi ni mwanafunzi mzuri sana . nina ng\'ombe wawili .'
+
+
+class CountCharacterDT(DataTextTransformer):
+    def transform(self, text: str):
+        return len(text)
+
+def test_something_good():
+    text_to_count = 'kevin-nelson-people'
+
+    counter = CountCharacterDT()
+    assert counter(text_to_count) == 19, "There should be 19"
