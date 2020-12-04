@@ -2,11 +2,12 @@ import re
 from unicodedata import normalize
 from overrides import overrides
 
+from typing import List, Tuple, Iterator
+
 from nltk.tokenize.regexp import RegexpTokenizer
-from ..reference_vocabulary import LowercaseSwahiliReferenceVocabulary as LowerCaseSwahiliRV, (
-    UNK_TOKEN, UNK_CHAR, NUM_TOKEN, \
-    REGEX_UNK_TOKEN, REGEX_UNK_CHAR, REGEX_NUM_TOKEN
-)
+from ..reference_vocabulary import ( LowercaseSwahiliReferenceVocabulary as LowerCaseSwahiliRV, \
+                                        UNK_TOKEN, UNK_CHAR, NUM_TOKEN, \
+                                        REGEX_UNK_TOKEN, REGEX_UNK_CHAR, REGEX_NUM_TOKEN )
 from ..transformers import DataTextTransformer, StackedDataTextTransformer
 
 """
@@ -97,7 +98,7 @@ class TagDataTransformer(DataTextTransformer):
 
     @property
     def regex_word(self):
-        return '[{self.word_regex}(\s){self.ref_vocab.base_word_non_letter_chars}]+'
+        return r'[%s(\s)%s]+' % (self.word_regex, self.ref_vocab.base_word_non_letter_chars)
 
     @property
     def regex_tag(self):
@@ -140,11 +141,14 @@ class TagDataTransformer(DataTextTransformer):
 TODO: Add docs
 IOB-Scheme NER Tagging
 """
+I_TAG = 'I'
+O_TAG = 'O'
+B_TAG = 'B'
 
 class NERDataTransformer(TagDataTransformer):
     @overrides
     def get_word_tag_regex(self):
-        return f'\[({self.regex_word}),([{self.regex_tag}]+)\]'
+        return r'\[(%s),([%s]+)\]' %  (self.regex_word, self.regex_tag)
 
     @property
     def regex_tag(self):
@@ -152,7 +156,7 @@ class NERDataTransformer(TagDataTransformer):
 
     def iob_encode(self, text, main_tag) -> List[Tuple[str, str]]:
         tag = B_TAG
-        for en_, word in enumerate(re.split('\s+', text)):
+        for en_, word in enumerate(re.split(r'\s+', text)):
             if en_ != 0:
                 tag = I_TAG
 
