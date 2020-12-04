@@ -6,6 +6,7 @@ tqdm>=4.45.0
 numpy>=1.19.4
 torch==1.5.1
 flair==0.5
+nltk==3.5
 
 requests==2.23.0
 scipy==1.5.4
