@@ -5,14 +5,8 @@ from marynlp.modules.module import Module
 
 class BaseEmbeddingModule(Module):
     @classmethod
-    def pretrained_categories(self)
+    def pretrained_categories(cls):
         return 'embeddings'
-
-    """This is responsible for loading the embedding model from GCP or local repository"""
-    @classmethod
-    def from_pretrained(cls, src: str, credentials_json_path: str):
-        # This gets the models folder as reference in the PRETRAINED_MODEL
-        cls.prepare_pretrained_model_path(src: str, credentials_json_path: str)
 
 class TokenEmbeddings(BaseEmbeddingModule):
     """Adds the interfaces that is required to use the embedding components"""
@@ -25,3 +19,5 @@ class TokenEmbeddings(BaseEmbeddingModule):
     def embedding_length(self):
         """To return the length of the embeddings"""
         raise NotImplementedError()
+
+
