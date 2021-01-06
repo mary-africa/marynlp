@@ -4,6 +4,8 @@ from . import _PRETRAINED_MODELS
 
 from zipfile import ZipFile
 
+from overrides import overrides
+
 from ..utils.storage import local as util_local
 from ..utils.storage.google import cache_from_google_bucket
 
@@ -113,3 +115,9 @@ class Module(object):
             locally, or from GCP Bucket that are referenced from a `self.pretrained_categories`"""
         raise NotImplementedError()
         
+
+class FlairModule(Module):
+    @classmethod
+    @overrides
+    def pretrained_categories(cls):
+        return 'flair'

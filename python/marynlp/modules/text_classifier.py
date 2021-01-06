@@ -1,4 +1,4 @@
-from .module import Module
+from .module import Module, FlairModule
 from pathlib import Path
 from overrides import overrides
 
@@ -11,12 +11,7 @@ class TextClassifier(Module):
     def from_pretrained(src: str, credentials_json_path: str, **model_kwargs):
         pass
 
-class FlairTextClassifier(TextClassifier):
-    @classmethod
-    @overrides
-    def pretrained_categories(cls):
-        return 'flair'
-
+class FlairTextClassifier(TextClassifier, FlairModule):
     @classmethod
     @overrides
     def from_pretrained(cls, src: str, inner_model_file: str, credentials_json_path: str=None):
