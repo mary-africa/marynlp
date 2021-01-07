@@ -60,7 +60,7 @@ class Module(object):
         raise NotImplementedError()
 
     @classmethod
-    def prepare_pretrained_model_path(cls, src: str, credentials_json_path: str = None, overwrite=True):
+    def prepare_pretrained_model_path(cls, src: str, credentials_json_path: str = None, overwrite=False):
         # check if the entered category exist
         model_categ = cls.pretrained_categories()
         assert model_categ in _PRETRAINED_MODELS, "The pretrained category '%s' doesn't exist" % (model_categ)
