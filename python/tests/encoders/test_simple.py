@@ -1,4 +1,4 @@
-from marynlp.encoders.label import LabelEncoder
+from marynlp.encoders import LabelEncoder
 
 lb_encoder = LabelEncoder(['a', 'e', 'i', 'o', 'u'])
 
