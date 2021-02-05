@@ -21,7 +21,9 @@ lm_gcp = {
 flair_gcp = {
     'sw-exp-sent_analy-small': 'flair/classifier/sw-exp-sent_analy-small.zip',
     'early-wpc': 'flair/classifier/exp-wpc-small.zip',
-    'early-sentiment-hasf': 'flair/classifier/sw-ft100-ffw-bilstm-exp-sent_analy-small-h256-noreproj.zip'
+    'early-sentiment-hasf': 'flair/classifier/sw-ft100-ffw-bilstm-exp-sent_analy-small-h256-noreproj.zip',
+    'early-alpha-tag-ner': 'flair/taggers/sw-ner-gen1f-base.zip',
+    'early-alpha-tag-pos': 'flair/taggers/sw-pos-early-h256.zip'
 }
 
 voice_gcp = {
