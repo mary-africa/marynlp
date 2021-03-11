@@ -22,7 +22,7 @@ class WordEmbeddings(TokenEmbeddings):
         pass
 
 
-class FastTextWordEmbeddings(TokenEmbeddings, FlairModule):
+class FastTextWordEmbeddings(TokenEmbeddings):
     def __init__(self, embedder) -> None:
         self._emb = embedder
 

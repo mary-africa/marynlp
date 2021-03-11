@@ -1,7 +1,7 @@
 from abc import abstractmethod
 from typing import List, Union
 
-from marynlp.modules.module import Module
+from ..module import Module
 
 class BaseEmbeddingModule(Module):
     @classmethod

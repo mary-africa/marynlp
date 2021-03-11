@@ -7,7 +7,7 @@ TODO: Make sure the code is NOT case INsensitive
 
 # Embeddings related models
 embeddings_gcp = {
-    
+    'sw-clean-fasttext': 'models/embeddings/sw-clean-ft-100-minn2_maxn5_e100_lr0.1.zip',    
 }
 
 # Language models
@@ -24,7 +24,6 @@ flair_gcp = {
     'early-sentiment-hasf': 'flair/classifier/sw-ft100-ffw-bilstm-exp-sent_analy-small-h256-noreproj.zip',
     'early-alpha-tag-ner': 'flair/taggers/sw-ner-gen1f-base.zip',
     'early-alpha-tag-pos': 'flair/taggers/sw-pos-early-h256.zip',
-    'sw-clean-fasttext': 'models/embeddings/sw-clean-ft-100-minn2_maxn5_e100_lr0.1.zip',
 }
 
 voice_gcp = {
