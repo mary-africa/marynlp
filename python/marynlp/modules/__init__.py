@@ -7,7 +7,7 @@ TODO: Make sure the code is NOT case INsensitive
 
 # Embeddings related models
 embeddings_gcp = {
-    'sw-clean-fasttext': 'models/embeddings/sw-clean-ft-100-minn2_maxn5_e50_lr0.1.zip',    
+    'sw-clean-fasttext': 'models/embeddings/sw-clean-ft-dim100-minn2-maxn5-epoch50-lr0.1.zip',    
 }
 
 # Language models
